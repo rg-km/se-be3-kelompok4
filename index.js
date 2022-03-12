@@ -126,6 +126,15 @@ function drawLife (snake) {
   }
 }
 
+function playDeath(){
+  var audio = new Audio('death.mp3');
+  audio.play();
+}
+
+function playLevel(){
+  var audio = new Audio('level-up.mp3');
+  audio.play();
+}
 
 function draw(){
   setInterval(function () {
@@ -195,6 +204,7 @@ cekbalok(snake)
     apple.position = initPosition()
     snake.score++
     levelup(snake)
+    playLevel();
     snake.body.push({ x: snake.head.x, y: snake.head.y })
     if((snake.score % 2 != 0 && snake.score >1) || snake.score == 2){
       nyawa.status = true
@@ -288,6 +298,7 @@ for(let i = 0; i <= 5; i++){
       snakes[0].nyawa1--
       snakes[0].head = initPosition()
       if(snakes[0].nyawa1 == 0){
+        playDeath();
         isCollide = true
       }
     }
@@ -299,7 +310,7 @@ for(let i = 0; i <= 5; i++){
       MOVE_INTERVAL =100
     }
   }
-
+  
   if (isCollide) {
     
     alert('Game over')
