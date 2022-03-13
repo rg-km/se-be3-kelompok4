@@ -14,7 +14,7 @@ const DIRECTION = {
   DOWN: 3
 }
 let MOVE_INTERVAL = 100
-
+let speed = 100
 function initPosition () {
   return {
     x: Math.floor(Math.random() * WIDTH),
@@ -97,6 +97,7 @@ return{
 function levelup(snake){
   if(snake.score % 5 == 0 ){
     MOVE_INTERVAL = MOVE_INTERVAL - 10
+    speed += 10
     snake.level = snake.level + 1
     if(snake.level <5){
     alert("Level " + snake.level + " complete")
@@ -131,7 +132,10 @@ function drawScore (snake) {
   scoreCtx.fillStyle = 'red'
   scoreCtx.fillText("Level: "+snake.level, 10,30)
   scoreCtx.fillStyle = 'blue'
-  scoreCtx.fillText(snake.score, 5, scoreCanvas.scrollHeight/1.2)
+  scoreCtx.fillText(snake.score, 10, scoreCanvas.scrollHeight/1.7)
+  scoreCtx.font = '15px Arial'
+  scoreCtx.fillStyle = 'Black'
+  scoreCtx.fillText("Speed :" +speed, 5, scoreCanvas.scrollHeight/1.2)
 }
 function drawLife (snake) {
   let life = document.getElementById('life')
@@ -366,6 +370,7 @@ function checkCollision (snakes) {
   }
   if(cekbalokcollecsion(snakes[0]) == true){
         isCollide = true
+    MOVE_INTERVAL = 100
   }
 
 
