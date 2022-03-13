@@ -94,7 +94,6 @@ return{
   y:10
 }
 }
-
 function levelup(snake){
   if(snake.score % 5 == 0 ){
     MOVE_INTERVAL = MOVE_INTERVAL - 10
@@ -147,8 +146,6 @@ function drawLife (snake) {
     lebar = lebar +29
   }
 }
-
-
 function draw(){
   setInterval(function () {
     let snakeCanvas = document.getElementById('snakeBoard')
@@ -235,7 +232,6 @@ function cekbalok(snake){
     }
   }
 }
-
 function cekbalokcollecsion(snake){
   let isCollide = false
   if(snake.level == 2){
@@ -419,6 +415,7 @@ function move (snake) {
       move(snake)
     }, MOVE_INTERVAL)
   } else {
+    location.reload()
     initGame()
   }
 }
