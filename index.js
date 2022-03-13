@@ -5,6 +5,8 @@ const CELL_SIZE_NYAWA = 20
 const REDRAW_INTERVAL = 50
 const WIDTH = CANVAS_SIZE / CELL_SIZE
 const HEIGHT = CANVAS_SIZE / CELL_SIZE
+var audio = new Audio('./gameover.mp3');
+var audiolevel = new Audio('./levelup.mp3');
 const DIRECTION = {
   LEFT: 0,
   RIGHT: 1,
@@ -64,7 +66,8 @@ let nyawa = {
   status : false
 }
 let balok = {
-  position: {x:9,y:10},
+  position: initbalok(),
+  status : false
 }
 
 
@@ -85,20 +88,39 @@ function drawlipe (ctx, x, y,stat) {
   }
 
 }
+function initbalok(){
+return{
+  x:9,
+  y:10
+}
+}
 
 function levelup(snake){
-  if(snake.score % 5 == 0){
+  if(snake.score % 5 == 0 ){
     MOVE_INTERVAL = MOVE_INTERVAL - 10
     snake.level = snake.level + 1
+    if(snake.level <5){
+    alert("Level " + snake.level + " complete")
+    audiolevel.play()
+    balok.status = true
+    }
   }
 }
-function drawblok(ctx,x,y){
+function drawblok(ctx,x,y,level){
   const image = new Image()
-  // const image1 = new Image()
   image.src = "https://e7.pngegg.com/pngimages/69/467/png-clipart-cube-computer-icons-three-dimensional-space-ice-block-angle-rectangle.png"
-  // let a = balok.position.x
   for(let i =0 ; i <=5; i++){
-          ctx.drawImage(image,(x+i)*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE)
+          if(level == 2){
+            ctx.drawImage(image,(x+i)*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE)  
+            ctx.drawImage(image,(x+i)*CELL_SIZE,(y+5)*CELL_SIZE,CELL_SIZE,CELL_SIZE)
+          }else if(level == 3){
+            ctx.drawImage(image,(x+i)*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE)
+            ctx.drawImage(image,(x+i)*CELL_SIZE,(y+5)*CELL_SIZE,CELL_SIZE,CELL_SIZE)
+            ctx.drawImage(image,(x+i)*CELL_SIZE,(y+10)*CELL_SIZE,CELL_SIZE,CELL_SIZE)
+          }else if(level == 4){
+            ctx.drawImage(image,x*CELL_SIZE,(y+i)*CELL_SIZE,CELL_SIZE,CELL_SIZE)
+            ctx.drawImage(image,(x+14)*CELL_SIZE,(y+i)*CELL_SIZE,CELL_SIZE,CELL_SIZE)
+          }
         }
 }
 function drawScore (snake) {
@@ -152,7 +174,7 @@ function draw(){
       CELL_SIZE,
       CELL_SIZE
       )
-      drawblok(ctx,balok.position.x, balok.position.y) 
+      drawblok(ctx,balok.position.x, balok.position.y,snake1.level) 
       drawScore(snake1)
       drawLife(snake1)
       setInterval(function () {
@@ -178,8 +200,9 @@ function teleport (snake) {
 }
 
 function cekbalok(snake){
+  if(snake.level == 2){
   for(let i = 0; i <= 5; i++){
-  if (snake.head.x == (balok.position.x+i) && snake.head.y == balok.position.y){
+  if ((snake.head.x == (balok.position.x+i) && snake.head.y == balok.position.y)|| (snake.head.x == (balok.position.x+i) && snake.head.y == (balok.position.y+5)) && balok.status == true){
     for(let j = 1; j < snake.body.length; j++){
     snake.body.pop()
     if(snake.body.length > 1){
@@ -188,6 +211,69 @@ function cekbalok(snake){
     }
 }
 }
+  }else if( snake.level == 3){
+    for(let i = 0; i <= 5; i++){
+      if ((snake.head.x == (balok.position.x+i) && snake.head.y == balok.position.y)|| (snake.head.x == (balok.position.x+i) && snake.head.y == (balok.position.y+5)) || (snake.head.x == (balok.position.x+i) && snake.head.y == (balok.position.y+10)) && balok.status == true){
+        for(let j = 1; j < snake.body.length; j++){
+        snake.body.pop()
+        if(snake.body.length > 1){
+          snake.body.pop() 
+          }
+        }
+    }
+    }
+  }else if(snake.level == 4){
+    for(let i = 0; i <= 5; i++){
+      if ((snake.head.x == balok.position.x && snake.head.y == (balok.position.y+i)|| snake.head.x == (balok.position.x+14) && snake.head.y == (balok.position.y+i))  && balok.status == true){
+        for(let j = 1; j < snake.body.length; j++){
+        snake.body.pop()
+        if(snake.body.length > 1){
+          snake.body.pop() 
+          }
+        }
+    }
+    }
+  }
+}
+
+function cekbalokcollecsion(snake){
+  let isCollide = false
+  if(snake.level == 2){
+  for(let i = 0; i <= 5; i++){
+    if ((snake.head.x == (balok.position.x+i) && snake.head.y == balok.position.y)|| (snake.head.x == (balok.position.x+i) && snake.head.y == (balok.position.y+5)) && balok.status == true){
+      cekbalok(snake)
+      snake.nyawa1--
+      snake.head = initPosition()
+      if(snake.nyawa1 == 0){
+        isCollide = true
+      }
+    }
+  }
+}else if(snake.level == 3){
+  for(let i = 0; i <= 5; i++){
+    if ((snake.head.x == (balok.position.x+i) && snake.head.y == balok.position.y)|| (snake.head.x == (balok.position.x+i) && snake.head.y == (balok.position.y+5)) || (snake.head.x == (balok.position.x+i) && snake.head.y == (balok.position.y+10)) && balok.status == true){
+      cekbalok(snake)
+      snake.nyawa1--
+      snake.head = initPosition()
+      if(snake.nyawa1 == 0){
+        isCollide = true
+      }
+    }
+  }
+}else if(snake.level == 4){
+  for(let i = 0; i <= 5; i++){
+    if ((snake.head.x == balok.position.x && snake.head.y == (balok.position.y+i))|| (snake.head.x == (balok.position.x+14) && snake.head.y == (balok.position.y+i))  && balok.status == true){
+      cekbalok(snake)
+      snake.nyawa1--
+      snake.head = initPosition()
+      if(snake.nyawa1 == 0){
+        isCollide = true
+      }
+    }
+  }
+}
+return isCollide
+
 }
 function eat (snake, apple) {
 cekbalok(snake)
@@ -282,16 +368,10 @@ function checkCollision (snakes) {
       }
     }
   }
-for(let i = 0; i <= 5; i++){
-    if (snakes[0].head.x == (balok.position.x+i) && snakes[0].head.y == balok.position.y){
-      cekbalok(snakes[0])
-      snakes[0].nyawa1--
-      snakes[0].head = initPosition()
-      if(snakes[0].nyawa1 == 0){
+  if(cekbalokcollecsion(snakes[0]) == true){
         isCollide = true
-      }
-    }
   }
+
 
   for(let i = 0 ; i < snakes.length; i++){
     if(snakes[i].level == 5){
@@ -299,11 +379,9 @@ for(let i = 0; i <= 5; i++){
       MOVE_INTERVAL =100
     }
   }
-
   if (isCollide) {
-    
-    alert('Game over')
-
+    alert('Game over')  
+    audio.play()
     snake1 = initSnake(
         'https://cdn4.iconfinder.com/data/icons/nuuline-fill-animals/150/animal_head_face_cartoon-23-512.png',
         './snake-kor.JPG'
@@ -341,7 +419,6 @@ function move (snake) {
       move(snake)
     }, MOVE_INTERVAL)
   } else {
-    balok.position = initPosition()
     initGame()
   }
 }
