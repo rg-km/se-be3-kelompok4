@@ -202,7 +202,7 @@ function teleport (snake) {
   }
   
 }
-
+////Fungsi Jika terkena Balok Body  snake akan berkurang
 function cekbalok(snake){
   if(snake.level == 2){
   for(let i = 0; i <= 5; i++){
