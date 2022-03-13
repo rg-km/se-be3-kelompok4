@@ -106,6 +106,7 @@ function levelup(snake){
     }
   }
 }
+///Menambahkan Wall Pada Snake
 function drawblok(ctx,x,y,level){
   const image = new Image()
   image.src = "./assets/balok.png"
