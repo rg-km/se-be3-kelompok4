@@ -125,6 +125,7 @@ function drawblok(ctx,x,y,level){
           }
         }
 }
+/// Menambahkan fungsi draw score, speed, level
 function drawScore (snake) {
   let scoreCanvas
   scoreCanvas = document.getElementById('score1Board')
@@ -322,7 +323,8 @@ cekbalok(snake)
   }
   }else{
     setTimeout(function(){
-      nyawa.status = false  
+      nyawa.status = false 
+   
   }) 
 }
   }
@@ -373,13 +375,14 @@ function checkCollision (snakes) {
   if(cekbalokcollecsion(snakes[0]) == true){
         isCollide = true
     MOVE_INTERVAL = 100
+    speed = 100 //update speed
   }
-
 
   for(let i = 0 ; i < snakes.length; i++){
     if(snakes[i].level == 5){
       isWin = true
       MOVE_INTERVAL =100
+      speed =100  //update speed
     }
   }
   if (isCollide) {
