@@ -47,7 +47,7 @@ function initSnake (sorce, bdn) {
   }
 }
 let snake1 = initSnake(
-  'https://cdn4.iconfinder.com/data/icons/nuuline-fill-animals/150/animal_head_face_cartoon-23-512.png',
+  './assets/headsnake.jpg',
   './snake-kor.JPG'
 )
 
@@ -82,7 +82,7 @@ function drawsanke (ctx, x, y, sorce) {
 }
 function drawlipe (ctx, x, y,stat) {
   const image = new Image()
-  image.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Love_Heart_symbol.svg/1200px-Love_Heart_symbol.svg.png"
+  image.src = "./assets/life.jpg"
   if(stat == true){     
       ctx.drawImage(image, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
   }
@@ -107,7 +107,7 @@ function levelup(snake){
 }
 function drawblok(ctx,x,y,level){
   const image = new Image()
-  image.src = "https://e7.pngegg.com/pngimages/69/467/png-clipart-cube-computer-icons-three-dimensional-space-ice-block-angle-rectangle.png"
+  image.src = "./assets/balok.png"
   for(let i =0 ; i <=5; i++){
           if(level == 2){
             ctx.drawImage(image,(x+i)*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE)  
@@ -379,14 +379,14 @@ function checkCollision (snakes) {
     alert('Game over')  
     audio.play()
     snake1 = initSnake(
-        'https://cdn4.iconfinder.com/data/icons/nuuline-fill-animals/150/animal_head_face_cartoon-23-512.png',
+        './assets/headsnake.jpg',
         './snake-kor.JPG'
       )
       return isCollide
   }else if(isWin){
     alert('Selamat Anda Menang')
     snake1 = initSnake(
-        'https://cdn4.iconfinder.com/data/icons/nuuline-fill-animals/150/animal_head_face_cartoon-23-512.png',
+        './assets/headsnake.jpg',
         './snake-kor.JPG'
       )
     return isWin
