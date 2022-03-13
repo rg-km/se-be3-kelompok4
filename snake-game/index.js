@@ -239,6 +239,7 @@ function cekbalok(snake){
     }
   }
 }
+///Fungsi untuk Mengurangi nyawa Jika Terkena wall
 function cekbalokcollecsion(snake){
   let isCollide = false
   if(snake.level == 2){
