@@ -94,6 +94,7 @@ return{
   y:10
 }
 }
+///Menambahkan fungsi level up
 function levelup(snake){
   if(snake.score % 5 == 0 ){
     MOVE_INTERVAL = MOVE_INTERVAL - 10
