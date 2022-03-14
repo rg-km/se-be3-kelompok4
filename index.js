@@ -392,14 +392,14 @@ function checkCollision (snakes) {
     audio.play()
     snake1 = initSnake(
         './assets/headsnake.jpg',
-        './snake-kor.JPG'
+        './assets/snake-kor.JPG'
       )
       return isCollide
   }else if(isWin){
     alert('Selamat Anda Menang')
     snake1 = initSnake(
         './assets/headsnake.jpg',
-        './snake-kor.JPG'
+        './assets/snake-kor.JPG'
       )
     return isWin
   }
