@@ -388,8 +388,8 @@ function checkCollision (snakes) {
     }
   }
   if (isCollide) {
-    alert('Game over')  
     audio.play()
+    alert('Game over')  
     snake1 = initSnake(
         './assets/headsnake.jpg',
         './assets/snake-kor.JPG'
