@@ -94,6 +94,7 @@ return{
   y:10
 }
 }
+///Menambahkan fungsi level up
 function levelup(snake){
   if(snake.score % 5 == 0 ){
     MOVE_INTERVAL = MOVE_INTERVAL - 10
@@ -106,6 +107,7 @@ function levelup(snake){
     }
   }
 }
+///Menambahkan Wall Pada Snake
 function drawblok(ctx,x,y,level){
   const image = new Image()
   image.src = "./assets/balok.png"
@@ -123,6 +125,7 @@ function drawblok(ctx,x,y,level){
           }
         }
 }
+/// Menambahkan fungsi draw score, speed, level
 function drawScore (snake) {
   let scoreCanvas
   scoreCanvas = document.getElementById('score1Board')
@@ -199,7 +202,7 @@ function teleport (snake) {
   }
   
 }
-
+////Fungsi Jika terkena Balok Body  snake akan berkurang
 function cekbalok(snake){
   if(snake.level == 2){
   for(let i = 0; i <= 5; i++){
@@ -236,6 +239,7 @@ function cekbalok(snake){
     }
   }
 }
+///Fungsi untuk Mengurangi nyawa Jika Terkena wall
 function cekbalokcollecsion(snake){
   let isCollide = false
   if(snake.level == 2){
@@ -320,7 +324,8 @@ cekbalok(snake)
   }
   }else{
     setTimeout(function(){
-      nyawa.status = false  
+      nyawa.status = false 
+   
   }) 
 }
   }
@@ -371,13 +376,14 @@ function checkCollision (snakes) {
   if(cekbalokcollecsion(snakes[0]) == true){
         isCollide = true
     MOVE_INTERVAL = 100
+    speed = 100 //update speed
   }
-
 
   for(let i = 0 ; i < snakes.length; i++){
     if(snakes[i].level == 5){
       isWin = true
       MOVE_INTERVAL =100
+      speed =100  //update speed
     }
   }
   if (isCollide) {
