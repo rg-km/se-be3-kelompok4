@@ -48,7 +48,7 @@ function initSnake (sorce, bdn) {
 }
 let snake1 = initSnake(
   './assets/headsnake.jpg',
-  './snake-kor.JPG'
+  './assets/snake-kor.JPG'
 )
 
 let apple = {
