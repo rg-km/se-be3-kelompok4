@@ -80,6 +80,7 @@ function drawsanke (ctx, x, y, sorce) {
   image.src = sorce
   ctx.drawImage(image, x * CELL_SIZE , y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
 }
+///menambahkan fungsi draw life
 function drawlipe (ctx, x, y,stat) {
   const image = new Image()
   image.src = "./assets/life.jpg"
@@ -286,10 +287,10 @@ cekbalok(snake)
     snake.score++
     levelup(snake)
     snake.body.push({ x: snake.head.x, y: snake.head.y })
-    if((snake.score % 2 != 0 && snake.score >1) || snake.score == 2){
+    if((snake.score % 2 != 0 && snake.score >1) || snake.score == 2){  //fungsi draw life
       nyawa.status = true
       if(nyawa.status == true){
-      setTimeout(function(){
+      setTimeout(function(){ // draw life akan muncul ketika bilangan prima serta berlangsung selama 3 detik 
       cekbalok(snake)
       nyawa.position = initPosition()
         nyawa.status = false
@@ -313,10 +314,10 @@ cekbalok(snake)
     snake.score++
     levelup(snake)
     snake.body.push({ x: snake.head.x, y: snake.head.y })
-    if((snake.score % 2 != 0 && snake.score >1) || snake.score == 2){
+    if((snake.score % 2 != 0 && snake.score >1) || snake.score == 2){ /// draw life
     nyawa.status = true
     if(nyawa.status == true){
-    setTimeout(function(){
+    setTimeout(function(){ // draw life akan muncul ketika bilangan prima serta berlangsung selama 3 detik 
       nyawa.status = false
       nyawa.position = initPosition()
       cekbalok(snake)
@@ -460,9 +461,7 @@ document.addEventListener('keydown', function (event) {
     turn(snake1, DIRECTION.DOWN)
   }
 })
-
 function initGame () {
   move(snake1)
 }
-
 initGame()
