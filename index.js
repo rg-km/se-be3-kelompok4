@@ -5,8 +5,8 @@ const CELL_SIZE_NYAWA = 20
 const REDRAW_INTERVAL = 50
 const WIDTH = CANVAS_SIZE / CELL_SIZE
 const HEIGHT = CANVAS_SIZE / CELL_SIZE
-var audio = new Audio('./gameover.mp3');
-var audiolevel = new Audio('./levelup.mp3');
+var audio = new Audio('./assets/gameover.mp3');
+var audiolevel = new Audio('./assets/levelup.mp3');
 const DIRECTION = {
   LEFT: 0,
   RIGHT: 1,
